@@ -1,4 +1,11 @@
-.panel-heading {
-	background: #428bca;
+#header {
+	background-color: black;
 	color: white;
 }
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #428bca;
+    color: white;
+}
+
