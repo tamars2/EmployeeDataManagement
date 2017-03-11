@@ -4,8 +4,12 @@
 }
 
 .panel > .panel-heading {
-    background-image: none;
-    background-color: #428bca;
-    color: white;
+	background-image: none;
+	background-color: #428bca;
+	border-color: #428bca;
+	color: white;
 }
 
+.panel {
+	border-color: #428bca;
+}
