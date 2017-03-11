@@ -30,7 +30,8 @@ console.log("test");
   		employeeName: employeeName,
   		role: role,
   		startDate: startDate,
-  		monthlyRate: monthlyRate
+  		monthlyRate: monthlyRate,
+  		dateAdded: firebase.database.ServerValue.TIMESTAMP
   	});
   });
 
