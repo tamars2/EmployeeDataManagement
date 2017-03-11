@@ -1,4 +1,4 @@
-console.log("test");
+console.log("js is linked properly");
 
   // Initialize Firebase
   var config = {
@@ -10,14 +10,14 @@ console.log("test");
   };
   
   firebase.initializeApp(config);
-
+  //handshake with firebase
   var database = firebase.database();
-
+  //default values for global vars
   var employeeName = "";
   var role = "";
   var startDate = "";
   var monthlyRate = 0;
-
+  //on submit button click, store field values to firebase database as new employee
   $('#add-user').on("click", function(event){
   	event.preventDefault();
 
@@ -25,7 +25,7 @@ console.log("test");
   	role = $('#role-input').val().trim();
   	startDate = $('#start-input').val().trim();
   	monthlyRate = $('#monthly-input').val().trim();
-
+  	//store values of global variables to firebase
   	database.ref().push({
   		employeeName: employeeName,
   		role: role,
@@ -33,5 +33,40 @@ console.log("test");
   		monthlyRate: monthlyRate,
   		dateAdded: firebase.database.ServerValue.TIMESTAMP
   	});
+  });
+
+  database.ref().on("child_added", function(childSnapshot) {
+
+  	console.log
+      // Log everything that's coming out of snapshot
+      console.log(childSnapshot.val().employeeName);
+      // console.log(childSnapshot.val().role);
+      // console.log(childSnapshot.val().startDate);
+      // console.log(childSnapshot.val().monthlyRate);
+      console.log(childSnapshot.key);
+      //user inserts info
+      //user clicks submit
+      //submit push data to firebase
+      var row = $('<tr>');
+      var childID = childSnapshot.key;
+      row.addClass('employee');
+      row.attr("id", childID);
+      $('#employees').append(row);
+      var x = "#" + childID;
+
+      var name = $('<td>');
+      name.text(childSnapshot.val().employeeName);
+      $(x).append(name);
+
+      var employeeRole = $('<td>');
+      employeeRole.text(childSnapshot.val().role);
+      $(x).append(employeeRole);
+
+      var empStartDate = $('<td>');
+      empStartDate.text(childSnapshot.val().startDate);
+      $(x).append(empStartDate);
+
+
+
   });
 
