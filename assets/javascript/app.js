@@ -26,7 +26,7 @@ console.log("js is linked properly");
   	startDate = $('#start-input').val().trim();
   	monthlyRate = $('#monthly-input').val().trim();
   	//store values of global variables to firebase
-  	database.ref().push({
+  	database.ref('/employees').push({
   		employeeName: employeeName,
   		role: role,
   		startDate: startDate,
@@ -35,7 +35,7 @@ console.log("js is linked properly");
   	});
   });
 
-  database.ref().on("child_added", function(childSnapshot) {
+  database.ref('/employees').on("child_added", function(childSnapshot) {
 
   	console.log
       // Log everything that's coming out of snapshot
