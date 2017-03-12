@@ -1,5 +1,4 @@
-console.log("js is linked properly");
-
+$( document ).ready(function() {
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyD9oSd6t33HHOFIzoTY43iV4dfsOAsVthA",
@@ -31,42 +30,70 @@ console.log("js is linked properly");
   		role: role,
   		startDate: startDate,
   		monthlyRate: monthlyRate,
+      // totalBilled:
+      // TIMESTAMP records when data was added around the globe according to the server time
   		dateAdded: firebase.database.ServerValue.TIMESTAMP
   	});
   });
 
   database.ref().on("child_added", function(childSnapshot) {
 
-  	console.log
-      // Log everything that's coming out of snapshot
+      // // Log everything that's coming out of snapshot
+      // console.log(childSnapshot.val().employeeName);
+      // // console.log(childSnapshot.val().role);
+      // // console.log(childSnapshot.val().startDate);
+      // // console.log(childSnapshot.val().monthlyRate);
+      // console.log(childSnapshot.key);
+      // //user inserts info
+      // //user clicks submit
+      // //submit push data to firebase
+      // var row = $('<tr>');
+      // var childID = childSnapshot.key;
+      // row.addClass('employee');
+      // row.attr("id", childID);
+      // $('#employees').append(row);
+      // var x = "#" + childID;
+
+      // var name = $('<td>');
+      // name.text(childSnapshot.val().employeeName);
+      // $(x).append(name);
+
+      // var employeeRole = $('<td>');
+      // employeeRole.text(childSnapshot.val().role);
+      // $(x).append(employeeRole);
+
+      // var empStartDate = $('<td>');
+      // empStartDate.text(childSnapshot.val().startDate);
+      // $(x).append(empStartDate);
+
+
+      var empName = childSnapshot.val().employeeName;
+      var empRole = childSnapshot.val().role;
+      var empStartDate = childSnapshot.val().startDate;
+      var empMonthlyRate = childSnapshot.val().monthlyRate;
+      var empDateAdded = childSnapshot.val().dateAdded;
+      var empMonthsWorked = moment(empDateAdded).diff(empStartDate, "months");
+      var totalBilled = "$" + empMonthlyRate * empMonthsWorked;
+
+      console.log(empDateAdded);
+      console.log(empMonthsWorked);
+      console.log(totalBilled);
+
+
       console.log(childSnapshot.val().employeeName);
-      // console.log(childSnapshot.val().role);
-      // console.log(childSnapshot.val().startDate);
-      // console.log(childSnapshot.val().monthlyRate);
-      console.log(childSnapshot.key);
-      //user inserts info
-      //user clicks submit
-      //submit push data to firebase
-      var row = $('<tr>');
-      var childID = childSnapshot.key;
-      row.addClass('employee');
-      row.attr("id", childID);
-      $('#employees').append(row);
-      var x = "#" + childID;
+      console.log(childSnapshot.val().role);
+      console.log(childSnapshot.val().startDate);
+      console.log(childSnapshot.val().monthlyRate);
+      console.log(childSnapshot.val().dateAdded);
 
-      var name = $('<td>');
-      name.text(childSnapshot.val().employeeName);
-      $(x).append(name);
 
-      var employeeRole = $('<td>');
-      employeeRole.text(childSnapshot.val().role);
-      $(x).append(employeeRole);
+      $("#employees").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" + empStartDate + "</td><td>" + empMonthsWorked + "</td><td>" + empMonthlyRate + "</td><td>" + totalBilled + "</td></tr>");
 
-      var empStartDate = $('<td>');
-      empStartDate.text(childSnapshot.val().startDate);
-      $(x).append(empStartDate);
-
+      }, function (errorObject) {
+          console.log('The read failed' + errorObject.code);
 
 
   });
+
+});
 
