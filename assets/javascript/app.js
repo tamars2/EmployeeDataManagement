@@ -30,7 +30,6 @@ $( document ).ready(function() {
   		role: role,
   		startDate: startDate,
   		monthlyRate: monthlyRate,
-      // totalBilled:
       // TIMESTAMP records when data was added around the globe according to the server time
   		dateAdded: firebase.database.ServerValue.TIMESTAMP
   	});
@@ -72,20 +71,20 @@ $( document ).ready(function() {
       var empStartDate = childSnapshot.val().startDate;
       var empMonthlyRate = childSnapshot.val().monthlyRate;
       var empDateAdded = childSnapshot.val().dateAdded;
+      // Created a variable to figure out how many months worked
       var empMonthsWorked = moment(empDateAdded).diff(empStartDate, "months");
+      // Created a variable to figure out the total billed amount
       var totalBilled = "$" + empMonthlyRate * empMonthsWorked;
 
-      console.log(empDateAdded);
-      console.log(empMonthsWorked);
-      console.log(totalBilled);
+      // console.log(empDateAdded);
+      // console.log(empMonthsWorked);
+      // console.log(totalBilled);
 
-
-      console.log(childSnapshot.val().employeeName);
-      console.log(childSnapshot.val().role);
-      console.log(childSnapshot.val().startDate);
-      console.log(childSnapshot.val().monthlyRate);
-      console.log(childSnapshot.val().dateAdded);
-
+      // console.log(childSnapshot.val().employeeName);
+      // console.log(childSnapshot.val().role);
+      // console.log(childSnapshot.val().startDate);
+      // console.log(childSnapshot.val().monthlyRate);
+      // console.log(childSnapshot.val().dateAdded);
 
       $("#employees").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" + empStartDate + "</td><td>" + empMonthsWorked + "</td><td>" + empMonthlyRate + "</td><td>" + totalBilled + "</td></tr>");
 
